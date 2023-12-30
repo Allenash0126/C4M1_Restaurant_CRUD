@@ -39,9 +39,11 @@
       <div class="row row-cols-sm-3">
         {{!-- {{#each restaurants as |restaurant|}} --}}
         {{#each restaurants}}
-        <a href="/restaurants/{{this.id}}" class="text-secondary">
+
           <div class="card mb-3">
-            <img class="card-img-top" src="{{this.image}}" alt="{{this.name}}">
+            <a href="/restaurants/{{this.id}}" class="text-secondary">
+              <img class="card-img-top" src="{{this.image}}" alt="{{this.name}}">
+            </a>
             <div class="card-body p-3">
               <h6 class="card-title mb-1">{{this.name}}</h6>
 
@@ -54,13 +56,20 @@
                 <i class="fas fa-star fa-xs"></i>
               </span>
 
-              <span>
-                detail
-              </span>
+              <a href="/restaurants/{{this.id}}" class="text-secondary">
+                <span>
+                  detail
+                </span>
+              </a>
+
+              <a href="/restaurants/{{this.id}}/edit" class="text-secondary">
+                <span>
+                  edit
+                </span>
+              </a>
 
             </div>
           </div>
-        </a>
         {{/each}}
       </div>
     </div>
