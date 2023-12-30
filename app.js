@@ -2,7 +2,6 @@ const express = require('express')
 const { engine } = require('express-handlebars')
 const app = express()
 const port = 3000
-// const restaurants = require('./public/jsons/restaurant.json').results
 
 const db = require('./models')
 const Restaurant = db.Restaurant
@@ -52,6 +51,16 @@ app.post('/restaurants', (req,res) => {
 
   return Restaurant.create({ name, name_en, category, image, location, phone, google_map, rating,description })
   .then(() => res.redirect('/restaurants'))
+})
+
+app.get('/restaurants/:id',(req,res) => {
+  const id = req.params.id
+
+  return Restaurant.findByPk(id, {
+    attributes:['id','name','name_en','category','image','location','phone','google_map','rating','description'],
+    raw: true
+  })
+    .then((restaurant) => res.render('restaurant', {restaurant}))
 })
 
 app.listen(port,() => {
