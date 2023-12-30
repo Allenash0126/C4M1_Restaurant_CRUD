@@ -26,11 +26,21 @@ app.get('/',(req,res) => {
 })
 
 app.get('/restaurants',(req,res) => {
+  const keyword = req.query.keyword?.trim()
   return Restaurant.findAll({
     attributes:['id','name','name_en','category','image','location','phone','google_map','rating','description'],
     raw: true
   })
-    .then((restaurants) => res.render('restaurants',{ restaurants }))
+    .then((restaurants) => {
+      const matchedRestaurants = keyword ? restaurants.filter(rt => 
+        Object.values(rt).some((property) => {
+          if (typeof property === 'string') {
+          return property.toLowerCase().includes(keyword.toLowerCase())
+          }
+          return false
+        })    
+      ) : restaurants
+      res.render('restaurants',{ restaurants: matchedRestaurants, keyword })})
 })
 
 app.listen(port,() => {
