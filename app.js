@@ -11,18 +11,10 @@ app.engine('.hbs', engine({ extname: '.hbs' }));
 app.set('view engine', '.hbs');
 app.set('views', './views');
 app.use(express.static('public'))
+app.use(express.urlencoded({ extended: true }))
 
 app.get('/',(req,res) => {
-  const keyword = req.query.keyword?.trim()
-  const matchedRestaurants = keyword ? restaurants.filter(rt => 
-    Object.values(rt).some((property) => {
-      if (typeof property === 'string') {
-      return property.toLowerCase().includes(keyword.toLowerCase())
-      }
-      return false
-    })    
-  ) : restaurants
-  res.render('index',{ restaurants: matchedRestaurants, keyword })
+
 })
 
 app.get('/restaurants',(req,res) => {
@@ -41,6 +33,25 @@ app.get('/restaurants',(req,res) => {
         })    
       ) : restaurants
       res.render('restaurants',{ restaurants: matchedRestaurants, keyword })})
+})
+
+app.get('/restaurants/new',(req,res) => {
+  res.render('new')
+})
+
+app.post('/restaurants', (req,res) => {
+  const name = req.body.name
+  const name_en = req.body.name_en
+  const category = req.body.category
+  const image = req.body.image
+  const location = req.body.location
+  const phone = req.body.phone
+  const google_map = req.body.google_map
+  const rating = req.body.rating
+  const description = req.body.description
+
+  return Restaurant.create({ name, name_en, category, image, location, phone, google_map, rating,description })
+  .then(() => res.redirect('/restaurants'))
 })
 
 app.listen(port,() => {
