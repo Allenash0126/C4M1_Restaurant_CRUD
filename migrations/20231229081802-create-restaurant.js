@@ -17,6 +17,34 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
+      category: {
+        type: Sequelize.TEXT,
+        allowNull: false
+      },
+      image: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },      
+      location: {
+        type: Sequelize.TEXT,
+        allowNull: false
+      },
+      phone: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+      google_map: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },      
+      rating: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+      description: {
+        type: Sequelize.TEXT,
+        allowNull: false
+      },      
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
