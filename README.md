@@ -19,20 +19,20 @@ cd C4M1_Restaurant_CRUD
 npm install
 
 -  MySQL server 連線之預設設定如下：
-host: '127.0.0.1'  // localhost
-username: 'root'
-password: 'password'
+host: '127.0.0.1'  // localhost, 
+username: 'root', 
+password: 'password', 
 database: 'restaurant'
 
 - 分別執行資料庫建立、資料表建立、匯入種子資料：
-npx sequelize db:migrate
+npx sequelize db:migrate, 
 npx sequelize db:seed:all
 
 - 啟動專案： 
 npm run dev
 
 - 打開瀏覽器：
-enter http://localhost:3000
+enter http://localhost:3000, 
 you will see: express server is running on http://localhost:3000
 
 ### 工具（Tools）
