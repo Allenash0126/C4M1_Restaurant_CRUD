@@ -45,7 +45,7 @@
         {{restaurant.phone}}
       </p>
 
-      <p class="mb-5">
+      <p class="mb-1">
         <span class="text-secondary">
           <i class="fas fa-mobile-alt pr-2"></i>
             介紹：
@@ -53,10 +53,16 @@
         {{restaurant.description}}
       </p>
 
-      <a href="/restaurants/{{restaurant.id}}/edit" class="text-secondary">
-        <span>
-          edit
-        </span>
+      <a href="/restaurants/{{restaurant.id}}/edit">
+        <button class="btn btn-primary mb-1">
+          編輯
+        </button>
+      </a>
+
+      <a href="/restaurants">
+        <button class="btn btn-secondary mb-1">
+          返回
+        </button>
       </a>
 
       <img class="rounded mx-auto d-block mb-4 w-100" src="{{restaurant.image}}" alt="{{restaurant.name}}"

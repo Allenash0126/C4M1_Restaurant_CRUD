@@ -1,20 +1,59 @@
 <div>
   <form action="/restaurants/{{restaurant.id}}?_method=PUT" method="post" style="display: inline;">
-    <input type="text" placeholder="name" name="name" value="{{restaurant.name}}">
-    <input type="text" placeholder="name_en" name="name_en" value="{{restaurant.name_en}}">
-    <input type="text" placeholder="category" name="category" value="{{restaurant.category}}">
-    <input type="text" placeholder="image" name="image" value="{{restaurant.image}}">
-    <input type="text" placeholder="location" name="location" value="{{restaurant.location}}">
-    <input type="text" placeholder="phone" name="phone" value="{{restaurant.phone}}">
-    <input type="text" placeholder="google_map" name="google_map" value="{{restaurant.google_map}}">
-    <input type="text" placeholder="rating" name="rating" value="{{restaurant.rating}}">
-    <input type="text" placeholder="description" name="description" value="{{restaurant.description}}">
-    <button type="submit">儲存</button>
+    <div>
+      <label class="mb-3 col-3" for="name">name</label>
+      <input class="mb-3 col-3" type="text" placeholder="name" name="name" value="{{restaurant.name}}">
+    </div>
+    
+    <div>
+      <label class="mb-3 col-3" for="name_en">name_en</label>
+      <input class="mb-3 col-3" type="text" placeholder="name_en" name="name_en" value="{{restaurant.name_en}}">
+    </div>
+    <div>
+      <label class="mb-3 col-3" for="category">category</label>
+      <input type="text" placeholder="category" name="category" value="{{restaurant.category}}">
+    </div>
+    <div>
+      <label class="mb-3 col-3" for="image">image</label>
+      <input type="text" placeholder="image" name="image" value="{{restaurant.image}}">
+    </div>
+    <div>
+      <label class="mb-3 col-3" for="location">location</label>
+      <input type="text" placeholder="location" name="location" value="{{restaurant.location}}">
+    </div>
+    <div>
+      <label class="mb-3 col-3" for="phone">phone</label>
+      <input type="text" placeholder="phone" name="phone" value="{{restaurant.phone}}">
+    </div>
+    <div>
+      <label class="mb-3 col-3" for="google_map">google_map</label>
+      <input type="text" placeholder="google_map" name="google_map" value="{{restaurant.google_map}}">
+    </div>
+    <div>
+      <label class="mb-3 col-3" for="rating">rating</label>
+      <input type="text" placeholder="rating" name="rating" value="{{restaurant.rating}}">
+    </div>
+    <div>
+      <label class="mb-3 col-3" for="description">description</label>
+      <input type="text" placeholder="description" name="description" value="{{restaurant.description}}">
+    </div>
+
+
+    
+    
+    
+    
+    
+    
+    
+    <button type="submit" class="btn btn-primary">儲存</button>
   </form>
 
   <form action="/restaurants/{{restaurant.id}}?_method=DELETE" method="post" style="display: inline;">
-    <button type="submit">刪除</button>
+    <button type="submit" class="btn btn-danger">刪除</button>
   </form>
 
-  <a href="/restaurants" style="display: inline;">返回</a>
+  <form action="/restaurants/{{restaurant.id}}" style="display: inline;">
+      <button type="submit" class="btn btn-secondary">返回</button>
+  </form>
 </div>

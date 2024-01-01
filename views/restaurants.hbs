@@ -1,26 +1,31 @@
 <header>
   <!-- navigation -->
-  <nav class="navbar navbar-light bg-light">
-    <div class="container">
+  <nav class="navbar navbar-light bg-light d-flex justify-content-around">
+    <div>
       <a class="navbar-brand" href="/">
         <img src="https://assets-lighthouse.s3.amazonaws.com/uploads/image/file/6227/restaurant-list-logo.png"
           width="30" height="30" class="d-inline-block align-top" alt="我的餐廳清單">
         我的餐廳清單
       </a>
     </div>
+
+    <div>
+      <a class="mb-2" href="/restaurants/new">
+        <button type="submit" class="btn btn-info text-secondary-emphasis">新增一家餐廳</button>
+      </a>
+    </div>
+
   </nav>
 
   <div class="banner"></div>
 </header>
-
-<a class="mb-2" href="/restaurants/new">新增一家餐廳</a>
 
 <!-- search bar -->
 <div class="container search-bar">
   <div class="search-bar-outer">
     <div class="search-bar-inner">
       <form action="/restaurants">
-        <h4 class="mb-2">尋找餐廳：</h4>
+        <h4 class="mb-2 ">尋找餐廳：</h4>
         <div class="input-group">
           <input type="text" name="keyword" class="form-control" placeholder="輸入餐廳、分類" aria-label="Restaurant Name..."
             value="{{keyword}}" aria-describedby="search-button">
@@ -57,19 +62,15 @@
               </span>
 
               <a href="/restaurants/{{this.id}}" class="text-secondary">
-                <span>
-                  detail
-                </span>
+                <button type="submit" class="btn btn-outline-secondary">介紹</button>
               </a>
 
               <a href="/restaurants/{{this.id}}/edit" class="text-secondary">
-                <span>
-                  edit
-                </span>
+                <button type="submit" class="btn btn-outline-secondary">編輯</button>
               </a>
               
-              <form action="/restaurants/{{restaurant.id}}?_method=DELETE" method="post" style="display: inline;">
-                <button type="submit">刪除</button>
+              <form action="/restaurants/{{this.id}}?_method=DELETE" method="post" style="display: inline;">
+                <button type="submit" class="btn btn-outline-secondary">刪除</button>
               </form>
 
             </div>
