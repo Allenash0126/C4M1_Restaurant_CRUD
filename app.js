@@ -3,6 +3,8 @@ const { engine } = require('express-handlebars')
 const methodOverride = require('method-override')
 const app = express()
 const port = 3000
+// 在按下Button之後，才驗證輸入是否符合規格
+const wasValidated = 'was-validated'
 
 const db = require('./models')
 const Restaurant = db.Restaurant
@@ -37,9 +39,10 @@ app.get('/restaurants',(req,res) => {
 })
 
 app.get('/restaurants/new',(req,res) => {
-  res.render('new')
+  res.render('new', { wasValidated })
 })
 
+// 接住new.hbs送來的新增data，並在DB中create
 app.post('/restaurants', (req,res) => {
   const name = req.body.name
   const name_en = req.body.name_en
@@ -65,6 +68,7 @@ app.get('/restaurants/:id',(req,res) => {
     .then((restaurant) => res.render('restaurant', {restaurant}))
 })
 
+// 進入編輯頁面，並提取已在DB中的資料，放到既有欄位中
 app.get('/restaurants/:id/edit', (req,res) => {
   const id = req.params.id
 
@@ -72,12 +76,14 @@ app.get('/restaurants/:id/edit', (req,res) => {
     attributes:['id','name','name_en','category','image','location','phone','google_map','rating','description'],
     raw: true
   })
-    .then((restaurant) => res.render('edit',{ restaurant }))
+    .then((restaurant) => res.render('edit',{ restaurant, wasValidated }))
 })
 
+// 接住edit.hbs送來的更新data，更新DB
 app.put('/restaurants/:id',(req,res) => {
   const body = req.body
   const id = req.params.id
+
   return Restaurant.update({ name:body.name, name_en:body.name_en, category:body.category, image:body.image, location:body.location, phone:body.phone, google_map:body.google_map, rating:body.rating, description:body.description}, { where:{id} })
     .then(() => res.redirect(`/restaurants/${id}`))
 })

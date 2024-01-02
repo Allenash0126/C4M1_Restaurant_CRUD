@@ -1,52 +1,62 @@
 <div>
-  <form action="/restaurants/{{restaurant.id}}?_method=PUT" method="post" style="display: inline;">
-    <div>
-      <label class="mb-3 col-3" for="name">name</label>
-      <input class="mb-3 col-3" type="text" placeholder="name" name="name" value="{{restaurant.name}}">
+  <form action="/restaurants/{{restaurant.id}}?_method=PUT" method="post" class="needs-validation {{ wasValidated }}  row g-3">
+    <div id="name" class="col-md-3">
+      <label class="form-label" for="name">name</label>
+      <input type="text" placeholder="name" name="name" class="form-control" value="{{restaurant.name}}" required>
+      <div class="invalid-feedback">Please input name.</div>
+      <div class="valid-feedback">Good!</div>
     </div>
-    
-    <div>
-      <label class="mb-3 col-3" for="name_en">name_en</label>
-      <input class="mb-3 col-3" type="text" placeholder="name_en" name="name_en" value="{{restaurant.name_en}}">
+
+    <div id="name_en" class="col-md-3">
+      <label class="form-label" for="name_en">name_en</label>
+      <input class="form-control" type="text" placeholder="name_en" name="name_en" value="{{restaurant.name_en}}" required>
+      <div class="valid-feedback">Good!</div>
     </div>
-    <div>
-      <label class="mb-3 col-3" for="category">category</label>
-      <input type="text" placeholder="category" name="category" value="{{restaurant.category}}">
+
+    <div id="category" class="col-md-3">
+      <label class="form-label" for="category">category</label>
+      <input class="form-control" type="text" placeholder="category" name="category" value="{{restaurant.category}}" required>
+      <div class="valid-feedback">Good!</div>
     </div>
-    <div>
-      <label class="mb-3 col-3" for="image">image</label>
-      <input type="text" placeholder="image" name="image" value="{{restaurant.image}}">
+
+    <div id="image" class="col-md-3">
+      <label class="form-label" for="image">image</label>
+      <input class="form-control" type="url" placeholder="image" name="image" value="{{restaurant.image}}" required>
+      <div class="valid-feedback">Good!</div>
     </div>
-    <div>
+
+    <div id="location" class="col-md-3">
       <label class="mb-3 col-3" for="location">location</label>
-      <input type="text" placeholder="location" name="location" value="{{restaurant.location}}">
+      <input class="form-control" type="text" placeholder="location" name="location" value="{{restaurant.location}}" required>
+      <div class="valid-feedback">Good!</div>
     </div>
-    <div>
+
+    <div id="phone" class="col-md-3">
       <label class="mb-3 col-3" for="phone">phone</label>
-      <input type="text" placeholder="phone" name="phone" value="{{restaurant.phone}}">
+      <input class="form-control" type="tel" placeholder="phone" name="phone" value="{{restaurant.phone}}" required>
+      <div class="valid-feedback">Good!</div>
     </div>
-    <div>
+
+    <div id="google_map" class="col-md-3">
       <label class="mb-3 col-3" for="google_map">google_map</label>
-      <input type="text" placeholder="google_map" name="google_map" value="{{restaurant.google_map}}">
+      <input class="form-control" type="url" placeholder="google_map" name="google_map" value="{{restaurant.google_map}}"required>
+      <div class="valid-feedback">Good!</div>
     </div>
-    <div>
+
+    <div id="rating" class="col-md-3">
       <label class="mb-3 col-3" for="rating">rating</label>
-      <input type="text" placeholder="rating" name="rating" value="{{restaurant.rating}}">
+      <input type="text" placeholder="rating" name="rating" class="form-control col-3" value="{{restaurant.rating}}" required>
+      <div class="invalid-feedback">Please input number.</div>
+      <div class="valid-feedback">Good!</div>
     </div>
-    <div>
+
+    <div id="description" class="col-md-3">
       <label class="mb-3 col-3" for="description">description</label>
-      <input type="text" placeholder="description" name="description" value="{{restaurant.description}}">
+      <input class="form-control" type="text" placeholder="description" name="description" value="{{restaurant.description}}" required>
+      <div class="valid-feedback">Good!</div>
     </div>
-
-
     
-    
-    
-    
-    
-    
-    
-    <button type="submit" class="btn btn-primary">儲存</button>
+    <button type="submit" class="btn btn-primary" style="width: 5em; height: 3em">儲存</button>
   </form>
 
   <form action="/restaurants/{{restaurant.id}}?_method=DELETE" method="post" style="display: inline;">
