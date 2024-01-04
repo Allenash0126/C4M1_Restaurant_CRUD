@@ -69,10 +69,42 @@
                 <button type="submit" class="btn btn-outline-secondary">編輯</button>
               </a>
               
+              {{!-- 原本的刪除功能，可以刪除正確指定的餐廳 --}}
               <form action="/restaurants/{{this.id}}?_method=DELETE" method="post" style="display: inline;">
                 <button type="submit" class="btn btn-outline-secondary">刪除</button>
               </form>
+              
+              {{!-- 依助教要求，新增彈出視窗：在真正刪除前，再確認一次是否刪除  --}}
+              {{!-- 不過利用Bootstrap，好像無法讓表單正確運作 --}}
+              <!-- Button trigger modal -->
+              <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#modalTrigger">
+                刪除
+              </button>
+              
+              <!-- Modal -->
+              <div class="modal fade" id="modalTrigger" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-5" id="exampleModalLabel">警告</h1>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      請問您：是否確定要刪除此餐廳？
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">關閉</button>
+                      {{!-- 以下是直接複製正常的刪除功能，但不知為何會認錯id --}}
+                      <form action="/restaurants/{{this.id}}?_method=DELETE" method="post" style="display: inline;">
+                        <button type="submit" class="btn btn-outline-secondary" data-toggle="modal">刪除</button>
+                      </form>
 
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              
             </div>
           </div>
         {{/each}}
