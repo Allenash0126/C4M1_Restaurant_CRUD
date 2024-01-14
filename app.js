@@ -90,8 +90,6 @@ app.put('/restaurants/:id',(req,res) => {
 
 app.delete('/restaurants/:id', (req,res) => {
   const id = req.params.id
-  // 發現用Bootstrap，好像無法讓表單順利回傳 指定的正確id
-  console.log(id)
   return Restaurant.destroy({ where: {id} })
     .then(() => res.redirect('/restaurants'))  
 })
