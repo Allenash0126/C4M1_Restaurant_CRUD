@@ -1,13 +1,13 @@
-'use strict';
+'use strict'
 
 // 由原本手動鍵入種子資料，改為自動載入整筆json
 const initialData = require('../public/jsons/restaurant.json').results
-    initialData.forEach((data) => {
-      // 因為autoIncrement 會自動產生id，所以這裡先移除id 不然會跳錯
-      delete data.id
-      data.createdAt = new Date()
-      data.updatedAt = new Date()
-    })
+initialData.forEach((data) => {
+  // 因為autoIncrement 會自動產生id，所以這裡先移除id 不然會跳錯
+  delete data.id
+  data.createdAt = new Date()
+  data.updatedAt = new Date()
+})
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
@@ -18,4 +18,4 @@ module.exports = {
   async down (queryInterface, Sequelize) {
     await queryInterface.bulkDelete('Restaurants', null)
   }
-};
+}
