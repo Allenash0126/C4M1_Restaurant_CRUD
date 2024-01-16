@@ -1,3 +1,6 @@
+{{#if message}}
+<div>{{message}}</div>
+{{/if}}
 <header>
   <!-- navigation -->
   <nav class="navbar navbar-light bg-light d-flex justify-content-around">
@@ -70,7 +73,7 @@
               
               {{!-- 關於刪除鈕＋彈出視窗：以dialog＋onclick搭配script來寫 --}}
               <button type="submit" onclick="openDialog('modal_{{this.id}}')">
-                刪除Ｎ
+                刪除
               </button>
                 
               <dialog  id="modal_{{this.id}}">
