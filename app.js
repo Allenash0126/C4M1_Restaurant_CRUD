@@ -9,6 +9,7 @@ const port = 3000
 const wasValidated = 'was-validated'
 
 const db = require('./models')
+const messageHandler = require('./middlewares/message-handler')
 const Restaurant = db.Restaurant
 
 app.engine('.hbs', engine({ extname: '.hbs' }));
@@ -23,6 +24,7 @@ app.use(session({
   saveUninitialized: false
 }))
 app.use(flash())
+app.use(messageHandler)
 
 app.get('/',(req,res) => {
   res.redirect('/restaurants')
@@ -43,7 +45,7 @@ app.get('/restaurants',(req,res) => {
           return false
         })    
       ) : restaurants
-      res.render('restaurants',{ restaurants: matchedRestaurants, keyword, message: req.flash('success') })})
+      res.render('restaurants',{ restaurants: matchedRestaurants, keyword })})
 })
 
 app.get('/restaurants/new',(req,res) => {
@@ -75,7 +77,7 @@ app.get('/restaurants/:id',(req,res) => {
     attributes:['id','name','name_en','category','image','location','phone','google_map','rating','description'],
     raw: true
   })
-    .then((restaurant) => res.render('restaurant', { restaurant, message: req.flash('success') }))
+    .then((restaurant) => res.render('restaurant', { restaurant }))
 })
 
 // 進入編輯頁面，並提取已在DB中的資料，放到既有欄位中
