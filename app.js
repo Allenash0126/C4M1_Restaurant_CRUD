@@ -10,6 +10,7 @@ const wasValidated = 'was-validated'
 
 const db = require('./models')
 const messageHandler = require('./middlewares/message-handler')
+const errorHandler = require('./middlewares/error-handler')
 const Restaurant = db.Restaurant
 
 app.engine('.hbs', engine({ extname: '.hbs' }))
@@ -56,7 +57,7 @@ app.get('/restaurants/new', (req, res) => {
 })
 
 // 接住new.hbs送來的新增data，並在DB中create
-app.post('/restaurants', (req, res) => {
+app.post('/restaurants', (req, res, next) => {
   const name = req.body.name
   const name_en = req.body.name_en
   const category = req.body.category
@@ -71,6 +72,10 @@ app.post('/restaurants', (req, res) => {
     .then(() => {
       req.flash('success', '新增成功！')
       res.redirect('/restaurants')
+    })
+    .catch((error) => {
+      error.errorMessage = '新增失敗:('
+      next(error)      
     })
 })
 
@@ -96,7 +101,7 @@ app.get('/restaurants/:id/edit', (req, res) => {
 })
 
 // 接住edit.hbs送來的更新data，更新DB
-app.put('/restaurants/:id', (req, res) => {
+app.put('/restaurants/:id', (req, res, next) => {
   const body = req.body
   const id = req.params.id
 
@@ -105,16 +110,25 @@ app.put('/restaurants/:id', (req, res) => {
       req.flash('success', '更新成功！')
       res.redirect(`/restaurants/${id}`)
     })
+		.catch((error) => {
+			error.errorMessage = '更新失敗:('
+			next(error)
+		})
 })
 
-app.delete('/restaurants/:id', (req, res) => {
+app.delete('/restaurants/:id', (req, res, next) => {
   const id = req.params.id
   return Restaurant.destroy({ where: { id } })
     .then(() => {
       req.flash('success', '刪除成功！')
       res.redirect('/restaurants')
     })
+    .catch((error) => {
+      next(error)
+    })
 })
+
+app.use(errorHandler)
 
 app.listen(port, () => {
   console.log(`The server is runnung on http://localhost:${port}`)
