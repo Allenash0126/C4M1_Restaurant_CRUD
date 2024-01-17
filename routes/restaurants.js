@@ -4,6 +4,9 @@ const db = require('../models') //注意路徑變化，這裡改成兩個點，�
 const Restaurant = db.Restaurant
 
 router.get('/', (req, res) => {
+  const page = parseInt(req.query.page) || 1
+  const limit = 3
+
   const keyword = req.query.keyword?.trim()
   return Restaurant.findAll({
     attributes: ['id', 'name', 'name_en', 'category', 'image', 'location', 'phone', 'google_map', 'rating', 'description'],
@@ -20,7 +23,13 @@ router.get('/', (req, res) => {
           })
         )
         : restaurants
-      res.render('restaurants', { restaurants: matchedRestaurants, keyword })
+      res.render('restaurants', { 
+        keyword, 
+        restaurants: matchedRestaurants.slice((page-1)*limit, page*limit),
+        pre: page > 1 ? page - 1 : page,
+        next: page < Math.ceil((matchedRestaurants.length)/limit) ? page + 1 : page,
+        page 
+      })
     })
 })
 
