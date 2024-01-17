@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const db = require('../models') //注意路徑變化，這裡改成兩個點，因為要回到上一層
+const db = require('../models') // 注意路徑變化，這裡改成兩個點，因為要回到上一層
 const Restaurant = db.Restaurant
 
 router.get('/', (req, res) => {
@@ -25,12 +25,12 @@ router.get('/', (req, res) => {
           })
         )
         : restaurants
-      res.render('restaurants', { 
-        keyword, 
+      res.render('restaurants', {
+        keyword,
         restaurants: matchedRestaurants,
         pre: page > 1 ? page - 1 : page,
         next: page + 1,
-        page 
+        page
       })
     })
 })
@@ -59,7 +59,7 @@ router.post('/', (req, res, next) => {
     })
     .catch((error) => {
       error.errorMessage = '新增失敗:('
-      next(error)      
+      next(error)
     })
 })
 
@@ -95,10 +95,10 @@ router.put('/:id', (req, res, next) => {
       req.flash('success', '更新成功！')
       res.redirect(`/restaurants/${id}`)
     })
-		.catch((error) => {
-			error.errorMessage = '更新失敗:('
-			next(error)
-		})
+    .catch((error) => {
+      error.errorMessage = '更新失敗:('
+      next(error)
+    })
 })
 
 router.delete('/:id', (req, res, next) => {

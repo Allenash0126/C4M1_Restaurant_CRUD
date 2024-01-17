@@ -7,12 +7,12 @@ const app = express()
 const port = 3000
 
 // 設定環境變數 以隱藏敏感資訊暴露的風險
-if (process.env.NODE_ENV ==='development') {
+if (process.env.NODE_ENV === 'development') {
   require('dotenv').config()
 }
 
 const messageHandler = require('./middlewares/message-handler')
-const router = require('./routes') //不用指定檔案，因為預設就是會第一個找檔名為index者
+const router = require('./routes') // 不用指定檔案，因為預設就是會第一個找檔名為index者
 const errorHandler = require('./middlewares/error-handler')
 
 app.engine('.hbs', engine({ extname: '.hbs' }))
