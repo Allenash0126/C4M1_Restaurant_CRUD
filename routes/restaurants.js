@@ -5,33 +5,43 @@ const Restaurant = db.Restaurant
 
 router.get('/', (req, res) => {
   const page = parseInt(req.query.page) || 1
-  const limit = 3
-
+  const limit = 6
+  let totalRT = ''
   const keyword = req.query.keyword?.trim()
+
   return Restaurant.findAll({
-    attributes: ['id', 'name', 'name_en', 'category', 'image', 'location', 'phone', 'google_map', 'rating', 'description'],
-    offset: (page - 1) * limit,
-    limit,
-    raw: true
+    attributes: ['id', 'name']
   })
-    .then((restaurants) => {
-      const matchedRestaurants = keyword
-        ? restaurants.filter(rt =>
-          Object.values(rt).some((property) => {
-            if (typeof property === 'string') {
-              return property.toLowerCase().includes(keyword.toLowerCase())
-            }
-            return false
-          })
-        )
-        : restaurants
-      res.render('restaurants', {
-        keyword,
-        restaurants: matchedRestaurants,
-        pre: page > 1 ? page - 1 : page,
-        next: page + 1,
-        page
+  // 先確認目前的總餐廳數目，將用於定義：按鈕（next）的page最大值
+    .then((RT) => {
+      totalRT = RT.length
+    })
+    .then(() => {
+      return Restaurant.findAll({
+        attributes: ['id', 'name', 'name_en', 'category', 'image', 'location', 'phone', 'google_map', 'rating', 'description'],
+        offset: (page - 1) * limit,
+        limit,
+        raw: true
       })
+        .then((restaurants) => {
+          const matchedRestaurants = keyword
+            ? restaurants.filter(rt =>
+              Object.values(rt).some((property) => {
+                if (typeof property === 'string') {
+                  return property.toLowerCase().includes(keyword.toLowerCase())
+                }
+                return false
+              })
+            )
+            : restaurants
+          res.render('restaurants', {
+            keyword,
+            restaurants: matchedRestaurants,
+            pre: page > 1 ? page - 1 : page,
+            next: page < Math.ceil((totalRT) / limit) ? page + 1 : page,
+            page
+          })
+        })
     })
 })
 
