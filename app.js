@@ -5,6 +5,7 @@ const { engine } = require('express-handlebars')
 const methodOverride = require('method-override')
 const app = express()
 const port = 3000
+const passport = require('passport')
 
 // 設定環境變數 以隱藏敏感資訊暴露的風險
 if (process.env.NODE_ENV === 'development') {
@@ -27,6 +28,7 @@ app.use(session({
   saveUninitialized: false
 }))
 app.use(flash())
+app.use(passport.initialize())
 app.use(messageHandler)
 
 app.use(router)
