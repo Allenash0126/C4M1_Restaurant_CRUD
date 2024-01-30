@@ -1,0 +1,19 @@
+{{>message}}
+<h3>Register</h3>
+<form action="/users" method="post">
+  <label for="name" style="display: flex;">Name</label>
+  <input type="" name="name" id="name">
+
+  <label for="email" style="display: flex;">Email</label>
+  <input type="email" name="email" id="email" required>
+
+  <label for="password" style="display: flex">Password</label>
+  <input type="password" name="password" id="password" required>
+
+  <label for="confirmPassword" style="display: flex">Confirm Password</label>
+  <input type="password" name="confirmPassword" id="confirmPassword" required>
+
+  <button type="submit" style="display: flex;">Save</button>
+</form>
+<span>Already have an account?</span>
+<a href="/login">Login</a>

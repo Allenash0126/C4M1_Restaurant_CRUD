@@ -1,0 +1,13 @@
+{{>message}}
+<h3>Login</h3>
+<form action="/login" method="post">
+  <label for="email" style="display: flex;">Email</label>
+  <input type="email" name="email" id="email" required>
+
+  <label for="password" style="display: flex">Password</label>
+  <input type="password" name="password" id="password" required>
+
+  <button type="submit" style="display: flex;">Login</button>
+</form>
+<span>No account?</span>
+<a href="/register">Register</a>
