@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
@@ -7,7 +7,7 @@ module.exports = {
       type: Sequelize.INTEGER,
       references: {
         model: 'Users',
-        key: 'id' 
+        key: 'id'
       },
       onDelete: 'CASCADE',
       onUpdate: 'CASCADE'
@@ -17,4 +17,4 @@ module.exports = {
   async down (queryInterface, Sequelize) {
     await queryInterface.removeColumn('Restaurants', 'userId')
   }
-};
+}
