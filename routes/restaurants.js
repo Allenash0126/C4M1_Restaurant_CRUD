@@ -179,7 +179,7 @@ router.delete('/:id', (req, res, next) => {
           next(error)
         })
     })
-    
+
     .catch((error) => {
       error.errorMessage('資料取得失敗')
       next(error)
