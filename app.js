@@ -5,7 +5,6 @@ const { engine } = require('express-handlebars')
 const methodOverride = require('method-override')
 const app = express()
 const port = 3000
-const passport = require('passport')
 
 // 設定環境變數 以隱藏敏感資訊暴露的風險
 if (process.env.NODE_ENV === 'development') {
@@ -14,6 +13,7 @@ if (process.env.NODE_ENV === 'development') {
 
 const messageHandler = require('./middlewares/message-handler')
 const router = require('./routes') // 不用指定檔案，因為預設就是會第一個找檔名為index者
+const passport = require('./config/passport')
 const errorHandler = require('./middlewares/error-handler')
 
 app.engine('.hbs', engine({ extname: '.hbs' }))
